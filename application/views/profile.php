@@ -214,22 +214,11 @@ License: You must have a valid license purchased only from themeforest(the above
                                                             </div>
                                                             <div class="form-group">
                                                                 <label class="control-label">Type Marketing</label>
-                                                                <select class="bs-select form-control" id="type" name="type">
-                                                                    <!-- <option value="1">Ruang 1</option> -->
-                                                                    <?php
-                                                                    if($type != null){
-                                                                    foreach ($type as $type_marketing) 
-                                                                        { 
-                                                                            ?> 
-                                                                            <option value="<?php echo $marketings[0]["type"]?>"><?php echo $type_marketing->des ?></option>
-                                                                            <?php 
-                                                                        }
-                                                                    } ?>
-                                                                </select>
+                                                                <input type="text" value="<?php echo $marketings[0]["description"]?>"  class="form-control" name="description" disabled="true"/> 
                                                             </div>
                                                             <div class="form-group">
                                                                 <label class="control-label">Reference Code</label>
-                                                                <input type="text" value="<?php echo $marketings[0]["referalcode"]?>" style="font-weight:800;" class="form-control" name="referalcode" /> </div>
+                                                                <input type="text" value="<?php echo $marketings[0]["referalcode"]?>" style="font-weight:800;" class="form-control" name="referalcode" disabled="true" /> </div>
                                                            <div class="form-group">
                                                                 <label class="control-label">Referal Code</label>
                                                                 <input type="text" value="<?php echo $marketings[0]["code"]?>" style="font-weight:800;" class="form-control" disabled /> </div>

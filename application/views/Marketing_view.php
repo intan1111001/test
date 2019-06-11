@@ -58,7 +58,9 @@ License: You must have a valid license purchased only from themeforest(the above
                                                             <th> Nama</th>
                                                             <th> Alamat</th>
                                                             <th> Email</th>
+                                                            <th> Type</th>
                                                             <th> Actions</th>
+                                                            <th> Detail</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody id="upcoming_table_body">
@@ -83,11 +85,22 @@ License: You must have a valid license purchased only from themeforest(the above
                                                                         <td> 
                                                                             <?php echo $marketing->email ?> 
                                                                         </td> 
+                                                                        <td> 
+                                                                            <?php echo $marketing->description ?> 
+                                                                        </td> 
                                                                         <td>
                                                                             <div class="btn-group" >
                                                                                 <button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false" onclick="javascript:ubah('Marketing_controller/read/' + <?php echo $marketing->id ?>)"> Edit/Delete
                                                                                 </button>
                                                                             </div>
+                                                                        </td>
+                                                                        <td>
+                                                                            <?php if($marketing->type == 2){?>
+                                                                            <div class="btn-group" >
+                                                                                <button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false" onclick="javascript:peserta('<?php echo $marketing->code ?>')"> Show Sales
+                                                                                </button>
+                                                                            </div>
+                                                                            <?php } ?>
                                                                         </td>
                                                                     </tr> 
                                                                     <?php 
@@ -107,6 +120,8 @@ License: You must have a valid license purchased only from themeforest(the above
                 <!-- END CONTENT BODY -->
 			</div>
 
+            
+            </div>
             <div id="edit_modal" class="modal fade" role="dialog" aria-hidden="true">
 				<div class="modal-dialog">
 					<div class="modal-content">
@@ -201,7 +216,7 @@ License: You must have a valid license purchased only from themeforest(the above
 									<label class="col-sm-4 control-label">Type</label>
 									<div class="col-sm-8">
                                     <div class="input-group input-medium">
-                                    <select class="bs-select form-control" id="type" name="type" disabled = "true">
+                                    <select class="bs-select form-control" id="type" name="type">
                                         <!-- <option value="1">Ruang 1</option> -->
                                         <?php
                                         if($type != null){
@@ -228,8 +243,99 @@ License: You must have a valid license purchased only from themeforest(the above
                         
 						</form>
 					</div>
+                </div>
+                
+			</div>
+		</div>
+                <div id="detail_modal" class="modal fade" role="dialog" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+							<h4 class="modal-title">Detail Sales</h4>
+						</div>
+						<div class="modal-body">
+
+                             <!-- BEGIN EXAMPLE TABLE PORTLET-->
+                             <div class="portlet light portlet-fit portlet-datatable bordered">
+                                <div class="portlet-title">
+                                    <div class="caption">
+                                        <i class="icon-settings font-green"></i>
+                                        <span class="caption-subject font-green sbold uppercase">Detail Sales</span>
+                                    </div>
+                                    <div class="actions">
+                                        <div class="btn-group btn-group-devided" data-toggle="buttons">
+                                            <label class="btn btn-transparent grey-salsa btn-outline btn-circle btn-sm active">
+                                                <input type="radio" name="options" class="toggle" id="option1">Actions</label>
+                                            <label class="btn btn-transparent grey-salsa btn-outline btn-circle btn-sm">
+                                                <input type="radio" name="options" class="toggle" id="option2">Settings</label>
+                                        </div>
+                                        <div class="btn-group">
+                                            <a class="btn red btn-outline btn-circle" href="javascript:;" data-toggle="dropdown">
+                                                <i class="fa fa-share"></i>
+                                                <span class="hidden-xs"> Trigger Tools </span>
+                                                <i class="fa fa-angle-down"></i>
+                                            </a>
+                                            <ul class="dropdown-menu pull-right" id="sample_3_tools">
+                                                <li>
+                                                    <a href="javascript:;" data-action="0" class="tool-action">
+                                                        <i class="icon-printer"></i> Print</a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:;" data-action="1" class="tool-action">
+                                                        <i class="icon-check"></i> Copy</a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:;" data-action="2" class="tool-action">
+                                                        <i class="icon-doc"></i> PDF</a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:;" data-action="3" class="tool-action">
+                                                        <i class="icon-paper-clip"></i> Excel</a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:;" data-action="4" class="tool-action">
+                                                        <i class="icon-cloud-upload"></i> CSV</a>
+                                                </li>
+                                                <li class="divider"> </li>
+                                                <li>
+                                                    <a href="javascript:;" data-action="5" class="tool-action">
+                                                        <i class="icon-refresh"></i> Reload</a>
+                                                </li>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="portlet-body">
+                                    <div class="table-container">
+                                        <table class="table table-striped table-bordered table-hover" id="sample_3">
+                                        <thead>
+                                            <tr>
+                                            <th> No </th>
+                                            <th> No KTP </th>
+                                            <th> Nama </th>
+                                            <th> Hp </th>
+                                            <th> Email </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="bodytablepeserta">
+                                    
+                                        </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END EXAMPLE TABLE PORTLET-->
+                        </div>
+						<div class="modal-footer">
+							<button type="button" class="btn grey-salsa btn-outline" data-dismiss="modal">Close</button>
+					</div>
 				</div>
-            </div>	
+			</div>	
+            <!-- END CONTENT -->
+        </div>
+           
         <input type="hidden" id="typereferal" name="typereferal" value="<?php echo $this->session->userdata('type') ?>">
         <!-- END CONTAINER -->
         <?php $this->load->view('template/footer') ?>
@@ -240,6 +346,7 @@ License: You must have a valid license purchased only from themeforest(the above
             $('#add_ruang').click(function(event) {
 					this.blur(); // Manually remove focus from clicked link.
                     document.getElementById("nama").value = "";
+                        document.getElementById("id").value = "";
                         document.getElementById("alamat").value = "";
                         document.getElementById("ktp").value = "";
                         document.getElementById("hp").value = "";
@@ -247,11 +354,6 @@ License: You must have a valid license purchased only from themeforest(the above
                         document.getElementById("fb").value = "";
                         document.getElementById("ig").value = "";
 
-                        if(document.getElementById("typereferal").value == "1"){
-                            document.getElementById("type").value = "2";
-                        }else if(document.getElementById("typereferal").value == "2"){
-                            document.getElementById("type").value = "3";
-                        }
 
                     document.getElementById("delete_button").style.display = 'none';
 					$("#edit_modal").modal({
@@ -281,7 +383,12 @@ License: You must have a valid license purchased only from themeforest(the above
                         document.getElementById("referalcode").value = data["referalcode"];
                         document.getElementById("referalcode").disabled = true;
                         document.getElementById("type").disabled = true;
-                    document.getElementById("delete_button").style.display = '';
+                        document.getElementById("delete_button").style.display = 'none';
+                        if(document.getElementById("typereferal").value == 4){
+                            document.getElementById("delete_button").style.display = '';
+                            document.getElementById("referalcode").disabled = false;
+                            document.getElementById("type").disabled = false;
+                        }
                         console.log(data);
                         $("#edit_modal").modal({
 						escapeClose: false,
@@ -306,6 +413,19 @@ License: You must have a valid license purchased only from themeforest(the above
                     location.reload();
                 });
             }
+
+            function peserta(id){
+                $.get("http://localhost/company/Marketing_controller/read_code/"+id, function( data ) {
+                        $("#bodytablepeserta").html("");
+                    // $.get(base_url+"welcome/read/"+id, function( data ) {                   
+                    for(var i = 0; i<data.length; i++){
+                        $("#bodytablepeserta").append('<tr><th> '+ (i+1) + ' </th><th> '+data[i].ktp+' </th><th> '+data[i].nama+' </th><th> '+data[i].hp+'  </th><th> '+data[i].email+'  </th></tr>');
+                    }
+                    console.log(data);
+                });
+                $('#detail_modal').modal('show'); 
+            }
+
         </script>
     </body>
 

@@ -35,7 +35,7 @@ class Profile extends CI_Controller {
  
     function index() 
     {         
-        $data['marketings'] = $this->Marketing_model->getprofile(1);
+        $data['marketings'] = $this->Marketing_model->get_by_code($this->session->userdata('code'));
         $data['type'] = $this->Codemaster_model->get_Codemaster("type = 'MRK'");
         $this->load->view('template/head'); 
         $this->load->view('template/core_plugins'); 
@@ -65,8 +65,6 @@ class Profile extends CI_Controller {
             'email' => $this->input->post('email', TRUE) , 
             'fb' => $this->input->post('fb', TRUE) , 
             'ig' => $this->input->post('ig', TRUE) , 
-            'referalcode' => $this->input->post('referalcode', TRUE) , 
-            'type' => $this->input->post('type', TRUE) , 
             'status' => 1
         ); 
         $this->Marketing_model->update($id , $data); 

@@ -109,7 +109,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 
                 <div class="form-group">
                     <label class="control-label visible-ie8 visible-ie9">Type Marketing</label>
-                    <select class="bs-select form-control" id="type" name="type">
+                    <select class="bs-select form-control" id="type" name="type" disabled = "true">
                                         <!-- <option value="1">Ruang 1</option> -->
                                         <?php
                                         if($type != null){
@@ -164,6 +164,13 @@ License: You must have a valid license purchased only from themeforest(the above
                     function( data ) {
                     document.getElementById("namareferal").value = data[0]["nama"];
                     document.getElementById("statusreferal").value = data[0]["description"];
+
+                    if(data[0]["type"] == 1){
+                        document.getElementById("type").value = 2;
+                    }else if(data[0]["type"] == 2){
+                        document.getElementById("type").value = 3;
+                    }
+                    document.getElementById("type").disabled = "true";
                     });
 
             }

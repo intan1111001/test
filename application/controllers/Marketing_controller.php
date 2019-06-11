@@ -38,8 +38,21 @@ class Marketing_controller extends CI_Controller {
  
     function index() 
     {         
-        $data['marketings'] = $this->Marketing_model->get_all("referalcode = '".$this->session->userdata('code')."'");
-        $data['type'] = $this->Codemaster_model->get_Codemaster("type = 'MRK'");
+        if($this->session->userdata('type') == 4){
+			$data['marketings'] = $this->Marketing_model->get_all("m.type != '4'");
+			$data['type'] = $this->Codemaster_model->get_Codemaster("type = 'MRK'");
+		}else{
+			$data['marketings'] = $this->Marketing_model->get_all("referalcode = '".$this->session->userdata('code')."'");
+		
+		}
+		
+		if($this->session->userdata('type') == 1){
+			$data['type'] = $this->Codemaster_model->get_Codemaster("type = 'MRK' and code in (2,5)");
+		}else if($this->session->userdata('type') == 2){
+			$data['type'] = $this->Codemaster_model->get_Codemaster("type = 'MRK' and code in (3,5)");
+		}else if($this->session->userdata('type') == 3){
+			$data['type'] = $this->Codemaster_model->get_Codemaster("type = 'MRK' and code = 5");
+		}
         $this->load->view('template/head'); 
         $this->load->view('template/core_plugins'); 
         $this->load->view('Marketing_view', $data); 
@@ -49,6 +62,7 @@ class Marketing_controller extends CI_Controller {
 	function insert() 
 	{ 
 		
+		$this->load->helper('string');
 		if( $this->input->post('id', TRUE) == null){
 			$data = array( 
 				'nama' => $this->input->post('nama', TRUE), 
@@ -58,25 +72,39 @@ class Marketing_controller extends CI_Controller {
 				'email' => $this->input->post('email', TRUE) , 
 				'fb' => $this->input->post('fb', TRUE) , 
 				'ig' => $this->input->post('ig', TRUE) , 
-				'referalcode' => $this->input->post('referalcode', TRUE) , 
+				'referalcode' => $this->session->userdata('code'), 
+				'code' => random_string('alnum',6),
 				'type' => $this->input->post('type', TRUE)  , 
 				'status' => 1
 			); 
 			$this->Marketing_model->insert($data); 
 		}else{
 			$id = $this->input->post('id', TRUE) ;
-			$data = array( 
-				'nama' => $this->input->post('nama', TRUE), 
-				'ktp' => $this->input->post('ktp', TRUE) , 
-				'alamat' => $this->input->post('alamat', TRUE) , 
-				'hp' => $this->input->post('hp', TRUE) , 
-				'email' => $this->input->post('email', TRUE) , 
-				'fb' => $this->input->post('fb', TRUE) , 
-				'ig' => $this->input->post('ig', TRUE) , 
-				'referalcode' => $this->input->post('referalcode', TRUE) , 
-				'type' => $this->input->post('type', TRUE) , 
-				'status' => 1
-			); 
+			if($this->session->userdata('type') == 4){
+				$data = array( 
+					'nama' => $this->input->post('nama', TRUE), 
+					'ktp' => $this->input->post('ktp', TRUE) , 
+					'alamat' => $this->input->post('alamat', TRUE) , 
+					'hp' => $this->input->post('hp', TRUE) , 
+					'email' => $this->input->post('email', TRUE) , 
+					'fb' => $this->input->post('fb', TRUE) , 
+					'ig' => $this->input->post('ig', TRUE) , 
+					'referalcode' => $this->input->post('referalcode', TRUE), 
+					'type' => $this->input->post('type', TRUE) , 
+					'status' => 1
+				); 
+			}else{
+				$data = array( 
+					'nama' => $this->input->post('nama', TRUE), 
+					'ktp' => $this->input->post('ktp', TRUE) , 
+					'alamat' => $this->input->post('alamat', TRUE) , 
+					'hp' => $this->input->post('hp', TRUE) , 
+					'email' => $this->input->post('email', TRUE) , 
+					'fb' => $this->input->post('fb', TRUE) , 
+					'ig' => $this->input->post('ig', TRUE) , 
+					'status' => 1
+				); 
+			}
 			$this->Marketing_model->update($id , $data); 
 		}
 		header('Content-Type: application/json');
@@ -90,12 +118,16 @@ class Marketing_controller extends CI_Controller {
 	}
 
 	function delete($id) 
-	{ 
+	{           
 		$this->Marketing_model->delete($id); 
 		header('Content-Type: application/json');
 		echo json_encode('success');
 	} 
 
+	public function read_code($id){
+		header('Content-Type: application/json');
+		echo json_encode($this->Marketing_model->get_by_referalcode($id));
+    }
 
 }
 

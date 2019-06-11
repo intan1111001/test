@@ -17,11 +17,15 @@ class Marketing_model extends CI_Model
  
     function get_all($filter = "") 
         { 
-        if($filter != ""){
-            $this->db->where($filter); 
-        }
-        $this->db->order_by($this->id, $this->order); 
-        return $this->db->get($this->table)->result(); 
+            $this->db->select("m.*, c.description");
+            $this->db->from("marketing m");
+            $this->db->join("codemaster c", "c.code = m.type and c.type='MRK'");
+            if($filter != ""){
+                $this->db->where($filter);
+            }
+            $query = $this->db->get();
+            $hasil = $query->result();
+            return $hasil;
         } 
 
     // get data by id 
@@ -39,19 +43,30 @@ class Marketing_model extends CI_Model
         $this->db->join("codemaster c", "c.code = m.type and c.type='MRK'");
         $this->db->where("m.code = '$id'");
         $query = $this->db->get();
-        $hasil = $query->result();
+        $hasil = $query->result_array();
         return $hasil;
         } 
 
-    function getprofile($id){
+        function get_by_referalcode($id) 
+        { 
         $this->db->select("m.*, c.description");
-        $this->db->where("m.id = '$id'");
         $this->db->from("marketing m");
         $this->db->join("codemaster c", "c.code = m.type and c.type='MRK'");
+        $this->db->where("m.referalcode = '$id'");
         $query = $this->db->get();
         $hasil = $query->result_array();
         return $hasil;
-    }
+        } 
+
+    // function getprofile($id){
+    //     $this->db->select("m.*, c.description");
+    //     $this->db->where("m.id = '$id'");
+    //     $this->db->from("marketing m");
+    //     $this->db->join("codemaster c", "c.code = m.type and c.type='MRK'");
+    //     $query = $this->db->get();
+    //     $hasil = $query->result_array();
+    //     return $hasil;
+    // }
  
     // insert data 
  
