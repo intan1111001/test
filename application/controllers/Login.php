@@ -104,6 +104,11 @@ class Login extends CI_Controller {
 	public function read($id){
 		header('Content-Type: application/json');
 		echo json_encode($this->Marketing_model->get_by_id($id));
+	}
+	
+	public function read_code($id){
+		header('Content-Type: application/json');
+		echo json_encode($this->Marketing_model->get_by_code($id));
     }
     
 
@@ -111,9 +116,14 @@ class Login extends CI_Controller {
         $pass = $this->input->post('password', TRUE);
         $username = $this->input->post('username', TRUE);
         $data = $this->User_model->get_by_id($username);
-        if($data != null && ($data->password == $pass)){
+        if($data != null && ($data->password == $pass)){			
+			$newdata = array(
+				'username'  => $data->nama,
+				'code'  => $data->code,
+				'type'  => $data->type
+			);
+			$this->session->set_userdata($newdata);
             redirect('Marketing_controller');
-            $_SESSION['username'] = $username;
         }else{
             redirect('Login');
         }

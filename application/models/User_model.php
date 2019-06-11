@@ -26,7 +26,10 @@ class User_model extends CI_Model
  
     function get_by_id($id) 
         { 
-        $this->db->where($this->id, $id); 
+        $this->db->select("m.*, u.*");
+        $this->db->from("marketing m");
+        $this->db->join("user u", "u.id_marketing = m.id ");
+        $this->db->where("u.username", $id); 
         return $this->db->get($this->table)->row(); 
         } 
  

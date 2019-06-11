@@ -72,7 +72,18 @@ License: You must have a valid license purchased only from themeforest(the above
             <!-- BEGIN REGISTRATION FORM -->
             <form class="register-form" action="Login/insert" method="post">
                 <h3 class="font-green">Sign Up</h3>
-                <p class="hint"> Enter your personal details below: </p>
+                <p class="hint"> details referal: </p>
+                <div class="form-group">
+                    <label class="control-label visible-ie8 visible-ie9">Referal Code</label>
+                    <input class="form-control placeholder-no-fix" type="text" placeholder="Referal Code" id="referalcode"  name="referalcode" onchange="javascript:change_code()" /> </div>
+                <div class="form-group">
+                    <label class="control-label visible-ie8 visible-ie9">Nama Referal</label>
+                    <input class="form-control placeholder-no-fix" type="text" disabled="true" id="namareferal" name="namareferal" /> </div>
+                <div class="form-group">
+                    <label class="control-label visible-ie8 visible-ie9">Status</label>
+                    <input class="form-control placeholder-no-fix" type="text" disabled="true"  id="statusreferal"  name="statusreferal" /> </div>
+                
+                <p class="hint"> Enter your personal details below: </p>    
                 <div class="form-group">
                     <label class="control-label visible-ie8 visible-ie9">Nama</label>
                     <input class="form-control placeholder-no-fix" type="text" placeholder="Nama" name="nama" /> </div>
@@ -95,9 +106,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 <div class="form-group">
                     <label class="control-label visible-ie8 visible-ie9">Instagram</label>
                     <input class="form-control placeholder-no-fix" type="text" placeholder="Instagram" name="ig" /> </div>
-                <div class="form-group">
-                    <label class="control-label visible-ie8 visible-ie9">Referal Code</label>
-                    <input class="form-control placeholder-no-fix" type="text" placeholder="Referal Code" name="referalcode" /> </div>
+                
                 <div class="form-group">
                     <label class="control-label visible-ie8 visible-ie9">Type Marketing</label>
                     <select class="bs-select form-control" id="type" name="type">
@@ -148,7 +157,16 @@ License: You must have a valid license purchased only from themeforest(the above
                 {
                     $('#radio1003').attr('checked', 'checked');
                 });
-            })
+            });
+
+            function change_code(){
+                $.get("http://localhost/company/Login/read_code/"+document.getElementById("referalcode").value, 
+                    function( data ) {
+                    document.getElementById("namareferal").value = data[0]["nama"];
+                    document.getElementById("statusreferal").value = data[0]["description"];
+                    });
+
+            }
         </script>
     </body>
 

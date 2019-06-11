@@ -42,9 +42,15 @@
                             <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
                             <li class="dropdown dropdown-user dropdown-dark">
                                 <a href="<?php echo "assets/"; ?>javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                                    <span class="username username-hide-on-mobile"> <?php //echo $_SESSION['username']?> </span>
+                                    <span class="username username-hide-on-mobile"> <?php echo $this->session->userdata('username')?> </span>
                                     <!-- DOC: Do not remove below empty space(&nbsp;) as its purposely used -->
                                     <img alt="" class="img-circle" src="<?php echo "assets/"; ?>theme/assets/layouts/layout4/img/avatar9.jpg" /> </a>
+                                <ul class="dropdown-menu dropdown-menu-default">
+                                    <li>
+                                        <a href="Login">
+                                            <i class="icon-key"></i> Log Out </a>
+                                    </li>
+                                </ul>
                             </li>
                             <!-- END USER LOGIN DROPDOWN -->
                         </ul>

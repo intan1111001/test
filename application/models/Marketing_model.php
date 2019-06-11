@@ -15,8 +15,11 @@ class Marketing_model extends CI_Model
  
     // get all 
  
-    function get_all() 
+    function get_all($filter = "") 
         { 
+        if($filter != ""){
+            $this->db->where($filter); 
+        }
         $this->db->order_by($this->id, $this->order); 
         return $this->db->get($this->table)->result(); 
         } 
@@ -27,6 +30,17 @@ class Marketing_model extends CI_Model
         { 
         $this->db->where($this->id, $id); 
         return $this->db->get($this->table)->row(); 
+        } 
+
+    function get_by_code($id) 
+        { 
+        $this->db->select("m.*, c.description");
+        $this->db->from("marketing m");
+        $this->db->join("codemaster c", "c.code = m.type and c.type='MRK'");
+        $this->db->where("m.code = '$id'");
+        $query = $this->db->get();
+        $hasil = $query->result();
+        return $hasil;
         } 
 
     function getprofile($id){

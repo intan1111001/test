@@ -42,7 +42,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                             <div class="portlet-title">
                                                 <div class="caption font-dark">
                                                     <i class="icon-settings font-dark"></i>
-                                                    <span class="caption-subject bold uppercase"> Marketing </span>
+                                                    <span class="caption-subject bold uppercase"> Marketing</span>
                                                 </div>
                                                 <div  class="text-align-reverse"  >
                                                                 <a id="add_ruang" class="btn sbold green">
@@ -118,7 +118,7 @@ License: You must have a valid license purchased only from themeforest(the above
 							<form action="Marketing_controller/insert" class="form-horizontal form-row-seperated" id = "detail" name="detail" method="post">
                                 <input type="hidden" id="id" name="id">
 								<div class="form-group">
-									<label class="col-sm-4 control-label">Nama</label>
+									<label class="col-sm-4 control-label">Nama (Sesuai KTP)</label>
 									<div class="col-sm-8">
                                     <div class="input-group input-medium">
 											<span class="input-group-addon">
@@ -148,7 +148,7 @@ License: You must have a valid license purchased only from themeforest(the above
 									</div>
                                 </div>
                                 <div class="form-group">
-									<label class="col-sm-4 control-label">Handphone</label>
+									<label class="col-sm-4 control-label">Handphone (WA)</label>
 									<div class="col-sm-8">
                                     <div class="input-group input-medium">
 											<span class="input-group-addon">
@@ -194,14 +194,14 @@ License: You must have a valid license purchased only from themeforest(the above
 											<span class="input-group-addon">
 												<i class="fa fa-check"></i>
 											</span>
-											<input type="text" id="referalcode" name="referalcode" class="form-control" value =""/> </div>
+											<input type="text" id="referalcode" name="referalcode" class="form-control" value ="<?php echo $this->session->userdata('code')?>" disabled = "true"/> </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
 									<label class="col-sm-4 control-label">Type</label>
 									<div class="col-sm-8">
                                     <div class="input-group input-medium">
-                                    <select class="bs-select form-control" id="type" name="type">
+                                    <select class="bs-select form-control" id="type" name="type" disabled = "true">
                                         <!-- <option value="1">Ruang 1</option> -->
                                         <?php
                                         if($type != null){
@@ -230,8 +230,7 @@ License: You must have a valid license purchased only from themeforest(the above
 					</div>
 				</div>
             </div>	
-        <input type="hidden" id="id_workshop" name="id_workshop" value="">
-        <input type="hidden" id="id_pendaftaran" name="id_pendaftaran" value="">
+        <input type="hidden" id="typereferal" name="typereferal" value="<?php echo $this->session->userdata('type') ?>">
         <!-- END CONTAINER -->
         <?php $this->load->view('template/footer') ?>
         <!-- BEGIN QUICK NAV -->
@@ -247,8 +246,13 @@ License: You must have a valid license purchased only from themeforest(the above
                         document.getElementById("email").value = "";
                         document.getElementById("fb").value = "";
                         document.getElementById("ig").value = "";
-                        document.getElementById("type").value = "";
-                        document.getElementById("referalcode").value = "";
+
+                        if(document.getElementById("typereferal").value == "1"){
+                            document.getElementById("type").value = "2";
+                        }else if(document.getElementById("typereferal").value == "2"){
+                            document.getElementById("type").value = "3";
+                        }
+
                     document.getElementById("delete_button").style.display = 'none';
 					$("#edit_modal").modal({
 						escapeClose: false,
@@ -275,6 +279,8 @@ License: You must have a valid license purchased only from themeforest(the above
                         document.getElementById("ig").value = data["ig"];
                         document.getElementById("type").value = data["type"];
                         document.getElementById("referalcode").value = data["referalcode"];
+                        document.getElementById("referalcode").disabled = true;
+                        document.getElementById("type").disabled = true;
                     document.getElementById("delete_button").style.display = '';
                         console.log(data);
                         $("#edit_modal").modal({

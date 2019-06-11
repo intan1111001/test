@@ -38,7 +38,7 @@ class Marketing_controller extends CI_Controller {
  
     function index() 
     {         
-        $data['marketings'] = $this->Marketing_model->get_all();
+        $data['marketings'] = $this->Marketing_model->get_all("referalcode = '".$this->session->userdata('code')."'");
         $data['type'] = $this->Codemaster_model->get_Codemaster("type = 'MRK'");
         $this->load->view('template/head'); 
         $this->load->view('template/core_plugins'); 
