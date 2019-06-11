@@ -1,11 +1,11 @@
  <!-- BEGIN HEADER -->
- <div class="page-header navbar navbar-fixed-top" style="background: #196b69;height:86px;">
+ <div class="page-header navbar navbar-fixed-top" style="background: #818488;height:86px;">
             <!-- BEGIN HEADER INNER -->
             <div class="page-header-inner ">
                 <!-- BEGIN LOGO -->
                 <div class="page-logo">
                     <a href="<?php echo "assets/theme/assets/"; ?>index.html">
-                        <img src="<?php echo "assets/"; ?>theme/assets/layouts/layout4/img/logo_1.png" alt="logo"  style="height:85px;"/> </a>
+                        <img src="<?php echo "assets/"; ?>theme/assets/layouts/layout4/img/logo1.png" alt="logo"  style="height: 135px;margin-top: -23px !important;"/> </a>
                         <!-- <div>
                         <h1 style="font-size: 24px;color: white;">e-Event</h1><br/>
                                 <small style="font-size: 24px;color: white;">UIN Sunan Ampel</small>
@@ -42,7 +42,7 @@
                             <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
                             <li class="dropdown dropdown-user dropdown-dark">
                                 <a href="<?php echo "assets/"; ?>javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                                    <span class="username username-hide-on-mobile"> <?php echo $this->session->userdata('username')?> </span>
+                                    <span class="username username-hide-on-mobile" style="color:#fff;"> <?php echo $this->session->userdata('username')?> </span>
                                     <!-- DOC: Do not remove below empty space(&nbsp;) as its purposely used -->
                                     <img alt="" class="img-circle" src="<?php echo "assets/"; ?>theme/assets/layouts/layout4/img/avatar9.jpg" /> </a>
                                 <ul class="dropdown-menu dropdown-menu-default">
