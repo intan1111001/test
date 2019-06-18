@@ -109,7 +109,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 
                 <div class="form-group">
                     <label class="control-label visible-ie8 visible-ie9">Type Marketing</label>
-                    <select class="bs-select form-control" id="type" name="type" disabled = "true">
+                    <select class="bs-select form-control" id="type" name="type" onchange="javascript:change_type()">
                                         <!-- <option value="1">Ruang 1</option> -->
                                         <?php
                                         if($type != null){
@@ -122,17 +122,23 @@ License: You must have a valid license purchased only from themeforest(the above
                                         } ?>
                                     </select></div>
                 
-                
+                <div id="keterangan_cus" style="display:none;">
+                    <div class="form-group">
+                            <label class="control-label visible-ie8 visible-ie9">Keterangan</label>
+                            <textarea class="form-control placeholder-no-fix" rows="7" cols="28" id="keterangan" name="keterangan" placeholder="Keterangan" style="height:100px;"></textarea> </div>
+                </div>
+                <div id="divusername" >
                 <p class="hint"> Enter your account details below: </p>
-                <div class="form-group">
-                    <label class="control-label visible-ie8 visible-ie9">Username</label>
-                    <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="Username" name="username" /> </div>
-                <div class="form-group">
-                    <label class="control-label visible-ie8 visible-ie9">Password</label>
-                    <input class="form-control placeholder-no-fix" type="password" autocomplete="off" id="register_password" placeholder="Password" name="password" /> </div>
-                <div class="form-group">
-                    <label class="control-label visible-ie8 visible-ie9">Re-type Your Password</label>
-                    <input class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="Re-type Your Password" name="rpassword" /> </div>
+                    <div class="form-group">
+                        <label class="control-label visible-ie8 visible-ie9">Username</label>
+                        <input class="form-control placeholder-no-fix" type="text" placeholder="Username" name="username" /> </div>
+                    <div class="form-group">
+                        <label class="control-label visible-ie8 visible-ie9">Password</label>
+                        <input class="form-control placeholder-no-fix" type="password" id="register_password" placeholder="Password" name="password" /> </div>
+                    <div class="form-group">
+                        <label class="control-label visible-ie8 visible-ie9">Re-type Your Password</label>
+                        <input class="form-control placeholder-no-fix" type="password" placeholder="Re-type Your Password" name="rpassword" /> </div>
+                </div>
                 <div class="form-group margin-top-20 margin-bottom-20">
                     <label class="mt-checkbox mt-checkbox-outline">
                         <input type="checkbox" name="tnc" /> I agree to the
@@ -162,17 +168,40 @@ License: You must have a valid license purchased only from themeforest(the above
             function change_code(){
                 $.get("http://localhost/company/Login/read_code/"+document.getElementById("referalcode").value, 
                     function( data ) {
+                                console.log(data);
                     document.getElementById("namareferal").value = data[0]["nama"];
                     document.getElementById("statusreferal").value = data[0]["description"];
 
-                    if(data[0]["type"] == 1){
-                        document.getElementById("type").value = 2;
-                    }else if(data[0]["type"] == 2){
-                        document.getElementById("type").value = 3;
+                    if(data[0]["type"] == 1){                            
+                       id = "2-5";
+                    }else if(data[0]["type"] == 2){                            
+                       id = "3-5"; 
                     }
-                    document.getElementById("type").disabled = "true";
+
+                    $.get("http://localhost/company/Login/readtype/"+id, 
+                            function( datatype ) {
+                                console.log(datatype);
+                                if(datatype.length > 0){                               
+                                    $("#type").html("");                          
+                                    for(var i = 0; i<datatype.length; i++){
+                                        $("#type").append("<option value="+datatype[i].code+">"+datatype[i].des+"</option>");
+                                    }
+                                }else{              
+                                    $("#nama_undangan").html("");                             
+                                }
+                            });
                     });
 
+            }
+
+            function change_type(){
+                    if(document.getElementById("type").value == "5"){
+                        document.getElementById("keterangan_cus").style.display = "";
+                        document.getElementById("divusername").style.display = "none";
+                    }else{
+                        document.getElementById("keterangan_cus").style.display = "none";
+                        document.getElementById("divusername").style.display = "";
+                    }
             }
         </script>
     </body>

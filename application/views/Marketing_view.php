@@ -228,9 +228,29 @@ License: You must have a valid license purchased only from themeforest(the above
                                             }
                                         } ?>
                                     </select>
+                                        </div>
                                     </div>
                                 </div>
-						</div>
+                            <div class="form-group">
+									<label class="col-sm-4 control-label">Username</label>
+									<div class="col-sm-8">
+                                    <div class="input-group input-medium">
+											<span class="input-group-addon">
+												<i class="fa fa-check"></i>
+											</span>
+											<input type="text" id="username" name="username" class="form-control"/> </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+									<label class="col-sm-4 control-label">Password</label>
+									<div class="col-sm-8">
+                                    <div class="input-group input-medium">
+											<span class="input-group-addon">
+												<i class="fa fa-check"></i>
+											</span>
+											<input type="text" id="password" name="password" class="form-control"/> </div>
+                                    </div>
+                                </div>
 						<div class="modal-footer">
 							<button type="button" class="btn grey-salsa btn-outline" data-dismiss="modal"><i class="fa fa-close">Close</i></button>
 							<button type="submit" class="btn green"  id="save_changes" name="save_changes">
@@ -353,6 +373,10 @@ License: You must have a valid license purchased only from themeforest(the above
                         document.getElementById("email").value = "";
                         document.getElementById("fb").value = "";
                         document.getElementById("ig").value = "";
+                        document.getElementById("password").value = "";
+                        document.getElementById("username").value = "";
+                        document.getElementById("password").disabled = false;
+                        document.getElementById("username").disabled = false;
 
 
                     document.getElementById("delete_button").style.display = 'none';
@@ -371,23 +395,29 @@ License: You must have a valid license purchased only from themeforest(the above
                     dataType : 'json',
                     success : function(data)
                     {
-                        document.getElementById("id").value = data["id"];
-                        document.getElementById("nama").value = data["nama"];
-                        document.getElementById("alamat").value = data["alamat"];
-                        document.getElementById("ktp").value = data["ktp"];
-                        document.getElementById("hp").value = data["hp"];
-                        document.getElementById("email").value = data["email"];
-                        document.getElementById("fb").value = data["fb"];
-                        document.getElementById("ig").value = data["ig"];
-                        document.getElementById("type").value = data["type"];
-                        document.getElementById("referalcode").value = data["referalcode"];
+                        document.getElementById("id").value = data[0]["id"];
+                        document.getElementById("nama").value = data[0]["nama"];
+                        document.getElementById("alamat").value = data[0]["alamat"];
+                        document.getElementById("ktp").value = data[0]["ktp"];
+                        document.getElementById("hp").value = data[0]["hp"];
+                        document.getElementById("email").value = data[0]["email"];
+                        document.getElementById("fb").value = data[0]["fb"];
+                        document.getElementById("ig").value = data[0]["ig"];
+                        document.getElementById("type").value = data[0]["type"];
+                        document.getElementById("referalcode").value = data[0]["referalcode"];
+                        document.getElementById("username").value = data[0]["username"];
+                        document.getElementById("password").value = data[0]["password"];
                         document.getElementById("referalcode").disabled = true;
                         document.getElementById("type").disabled = true;
+                        document.getElementById("password").disabled = true;
+                        document.getElementById("username").disabled = true;
                         document.getElementById("delete_button").style.display = 'none';
                         if(document.getElementById("typereferal").value == 4){
                             document.getElementById("delete_button").style.display = '';
                             document.getElementById("referalcode").disabled = false;
                             document.getElementById("type").disabled = false;
+                            document.getElementById("password").disabled = false;
+                            document.getElementById("username").disabled = false;
                         }
                         console.log(data);
                         $("#edit_modal").modal({

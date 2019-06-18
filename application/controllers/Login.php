@@ -30,6 +30,7 @@ class Login extends CI_Controller {
         $this->load->model('Marketing_model'); 
         $this->load->model('User_model'); 
         $this->load->model('Codemaster_model'); 
+        $this->load->model('Potcustomer_model'); 
         
         } 
 
@@ -51,51 +52,69 @@ class Login extends CI_Controller {
 	{ 
 		$this->load->helper('string');
 		if( $this->input->post('id', TRUE) == null){
-			$data = array( 
-				'nama' => $this->input->post('nama', TRUE), 
-				'ktp' => $this->input->post('ktp', TRUE) , 
-				'alamat' => $this->input->post('alamat', TRUE) , 
-				'hp' => $this->input->post('hp', TRUE) , 
-				'email' => $this->input->post('email', TRUE) , 
-				'fb' => $this->input->post('fb', TRUE) , 
-				'ig' => $this->input->post('ig', TRUE) , 
-				'referalcode' => $this->input->post('referalcode', TRUE) , 
-				'type' => $this->input->post('type', TRUE)  , 
-				'status' => 1, 
-				'code' => random_string('alnum',6)
-			); 
-            $id = $this->Marketing_model->insert($data); 
-            
-            $data = array( 
-				'username' => $this->input->post('username', TRUE) , 
-				'password' => $this->input->post('password', TRUE) , 
-				'id_marketing' => $id 
-			); 
-            $this->User_model->insert($data); 
-            
-		}else{
-			$id = $this->input->post('id', TRUE) ;
-			$data = array( 
-				'nama' => $this->input->post('nama', TRUE), 
-				'ktp' => $this->input->post('ktp', TRUE) , 
-				'alamat' => $this->input->post('alamat', TRUE) , 
-				'hp' => $this->input->post('hp', TRUE) , 
-				'email' => $this->input->post('email', TRUE) , 
-				'fb' => $this->input->post('fb', TRUE) , 
-				'ig' => $this->input->post('ig', TRUE) , 
-				'referalcode' => $this->input->post('referalcode', TRUE) , 
-				'type' => $this->input->post('type', TRUE) , 
-				'status' => 1
-			); 
-            $this->Marketing_model->update($id , $data);             
-            
-            $data = array( 
-				'password' => $this->input->post('password', TRUE) , 
-				'id_marketing' => $id 
-			); 
-            $this->User_model->update($this->input->post('username', TRUE), $data); 
+			if($this->input->post('type', TRUE) != 5){
+				$data = array( 
+					'nama' => $this->input->post('nama', TRUE), 
+					'ktp' => $this->input->post('ktp', TRUE) , 
+					'alamat' => $this->input->post('alamat', TRUE) , 
+					'hp' => $this->input->post('hp', TRUE) , 
+					'email' => $this->input->post('email', TRUE) , 
+					'fb' => $this->input->post('fb', TRUE) , 
+					'ig' => $this->input->post('ig', TRUE) , 
+					'referalcode' => $this->input->post('referalcode', TRUE) , 
+					'type' => $this->input->post('type', TRUE)  , 
+					'status' => 1, 
+					'code' => random_string('alnum',6)
+				); 
+				$id = $this->Marketing_model->insert($data); 
+
+				$data = array( 
+					'username' => $this->input->post('username', TRUE) , 
+					'password' => $this->input->post('password', TRUE) , 
+					'id_marketing' => $id 
+				); 
+				$this->User_model->insert($data); 
+			}else{
+				$data = array( 
+					'nama' => $this->input->post('nama', TRUE), 
+					'ktp' => $this->input->post('ktp', TRUE) , 
+					'alamat' => $this->input->post('alamat', TRUE) , 
+					'hp' => $this->input->post('hp', TRUE) , 
+					'email' => $this->input->post('email', TRUE) , 
+					'fb' => $this->input->post('fb', TRUE) , 
+					'ig' => $this->input->post('ig', TRUE) , 
+					'referalcode' => $this->input->post('referalcode', TRUE) , 
+					'keterangan' => $this->input->post('keterangan', TRUE) , 
+					'status' => 1
+				); 
+				$id = $this->Potcustomer_model->insert($data); 
+			}
             
 		}
+		
+		// else{
+		// 	$id = $this->input->post('id', TRUE) ;
+		// 	$data = array( 
+		// 		'nama' => $this->input->post('nama', TRUE), 
+		// 		'ktp' => $this->input->post('ktp', TRUE) , 
+		// 		'alamat' => $this->input->post('alamat', TRUE) , 
+		// 		'hp' => $this->input->post('hp', TRUE) , 
+		// 		'email' => $this->input->post('email', TRUE) , 
+		// 		'fb' => $this->input->post('fb', TRUE) , 
+		// 		'ig' => $this->input->post('ig', TRUE) , 
+		// 		'referalcode' => $this->input->post('referalcode', TRUE) , 
+		// 		'type' => $this->input->post('type', TRUE) , 
+		// 		'status' => 1
+		// 	); 
+        //     $this->Marketing_model->update($id , $data);             
+            
+        //     $data = array( 
+		// 		'password' => $this->input->post('password', TRUE) , 
+		// 		'id_marketing' => $id 
+		// 	); 
+        //     $this->User_model->update($this->input->post('username', TRUE), $data); 
+            
+		// }
 		header('Content-Type: application/json');
 		// echo json_encode($add_undangan);
 		redirect('Login');
@@ -108,8 +127,14 @@ class Login extends CI_Controller {
 	
 	public function read_code($id){
 		header('Content-Type: application/json');
-		echo json_encode($this->Marketing_model->get_by_code($id));
+		echo json_encode($this->Marketing_model->get_by_code("m.code = '".$id."'));
+	}
+	
+	public function readtype($id){
+		header('Content-Type: application/json');
+		echo json_encode($this->Codemaster_model->get_Codemaster("type = 'MRK' and code in ('".str_replace("-","','",$id)."')"));
     }
+    
     
 
     public function cek(){

@@ -29,6 +29,7 @@ class Marketing_controller extends CI_Controller {
         parent::__construct(); 
         $this->load->model('Marketing_model'); 
         $this->load->model('Codemaster_model'); 
+        $this->load->model('User_model'); 
         
         } 
 
@@ -77,7 +78,14 @@ class Marketing_controller extends CI_Controller {
 				'type' => $this->input->post('type', TRUE)  , 
 				'status' => 1
 			); 
-			$this->Marketing_model->insert($data); 
+			$id = $this->Marketing_model->insert($data); 
+
+			$data = array( 
+				'username' => $this->input->post('username', TRUE) , 
+				'password' => $this->input->post('password', TRUE) , 
+				'id_marketing' => $id 
+			); 
+			$this->User_model->insert($data); 
 		}else{
 			$id = $this->input->post('id', TRUE) ;
 			if($this->session->userdata('type') == 4){
@@ -114,7 +122,7 @@ class Marketing_controller extends CI_Controller {
 	} 
 	public function read($id){
 		header('Content-Type: application/json');
-		echo json_encode($this->Marketing_model->get_by_id($id));
+		echo json_encode($this->Marketing_model->get_by_code("m.id = '".$id."'"));
 	}
 
 	function delete($id) 
@@ -126,7 +134,7 @@ class Marketing_controller extends CI_Controller {
 
 	public function read_code($id){
 		header('Content-Type: application/json');
-		echo json_encode($this->Marketing_model->get_by_referalcode($id));
+		echo json_encode($this->Marketing_model->get_by_code("m.referalcode = '$id'"));
     }
 
 }
