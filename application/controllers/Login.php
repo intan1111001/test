@@ -85,6 +85,7 @@ class Login extends CI_Controller {
 					'ig' => $this->input->post('ig', TRUE) , 
 					'referalcode' => $this->input->post('referalcode', TRUE) , 
 					'keterangan' => $this->input->post('keterangan', TRUE) , 
+					'create_date' => date('Y-m-d') , 
 					'status' => 1
 				); 
 				$id = $this->Potcustomer_model->insert($data); 
