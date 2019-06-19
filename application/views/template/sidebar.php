@@ -21,6 +21,10 @@
                                 <i class="icon-home"></i>
                                 <span class="title">Profile</span>
                             </a>
+                            <a href="<?php echo base_url(); ?>Potensial_customer" class="nav-link nav-toggle">
+                                <i class="icon-home"></i>
+                                <span class="title">Potensial Customer</span>
+                            </a>
                         </li>
                     </ul>
                     <!-- END SIDEBAR MENU -->

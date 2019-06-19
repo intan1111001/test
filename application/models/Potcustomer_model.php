@@ -25,6 +25,7 @@ class Potcustomer_model extends CI_Model
  
     function get_by_id($id) 
         { 
+        $this->db->select("*");
         $this->db->where($this->id, $id); 
         return $this->db->get($this->table)->row(); 
         } 

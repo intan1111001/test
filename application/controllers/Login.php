@@ -128,7 +128,7 @@ class Login extends CI_Controller {
 	
 	public function read_code($id){
 		header('Content-Type: application/json');
-		echo json_encode($this->Marketing_model->get_by_code("m.code = '".$id."'));
+		echo json_encode($this->Marketing_model->get_by_code("m.code = '".$id."'"));
 	}
 	
 	public function readtype($id){
