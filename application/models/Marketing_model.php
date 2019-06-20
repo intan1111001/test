@@ -48,6 +48,31 @@ class Marketing_model extends CI_Model
         return $hasil;
         } 
 
+        function getktp($ktp, $id = "") 
+        {             
+            $this->db->select("COUNT(id) count");
+            $this->db->from("marketing ");
+            if($id != ""){
+                $this->db->where("ktp = '". $ktp ."' and id != '". $id ."'");
+            }else{                
+                $this->db->where("ktp = '". $ktp ."'");
+            }
+            $query = $this->db->get();
+            $hasil = $query->result_array();
+            if($hasil == null){
+                $this->db->select("COUNT(id) count");
+                $this->db->from("pot_customer ");
+                if($id != ""){
+                    $this->db->where("ktp = '". $ktp ."' and id != '". $id ."' and DATE_ADD(createdate, INTERVAL 3 MONTH) > now()");
+                }else{                
+                    $this->db->where("ktp = '". $ktp ."' and DATE_ADD(createdate, INTERVAL 3 MONTH) > now()");
+                }
+                $query = $this->db->get();
+                $hasil = $query->result_array();
+            }
+            return $hasil;
+        } 
+
         // function get_by_referalcode($id) 
         // { 
         // $this->db->select("m.*, c.description");

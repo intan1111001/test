@@ -117,7 +117,11 @@ License: You must have a valid license purchased only from themeforest(the above
 							<h4 class="modal-title">Edit Modal</h4>
 						</div>
 						<div class="modal-body">
-							<form action="Potensial_customer/insert" class="form-horizontal form-row-seperated" id = "detail" name="detail" method="post">
+							<form action="Potensial_customer/insert" class="form-horizontal form-row-seperated login-form" id = "detail" name="detail" method="post">
+                                <div class="alert alert-danger display-hide" style="display: block;" id="errorlog">
+                                    <button class="close" data-close="alert"></button>
+                                <span id="errormessage"> </span>
+                                </div>
                                 <input type="hidden" id="id" name="id">
 								<div class="form-group">
 									<label class="col-sm-4 control-label">Nama (Sesuai KTP)</label>
@@ -136,7 +140,7 @@ License: You must have a valid license purchased only from themeforest(the above
 											<span class="input-group-addon">
 												<i class="fa fa-check"></i>
 											</span>
-											<input type="text" id="ktp" name="ktp" class="form-control" value =""/> </div>
+											<input type="text" id="ktp" name="ktp" class="form-control" value ="" onchange="javascript:insertktp()"/> </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -246,9 +250,9 @@ License: You must have a valid license purchased only from themeforest(the above
                         document.getElementById("email").value = "";
                         document.getElementById("fb").value = "";
                         document.getElementById("ig").value = "";
-
-
-                    document.getElementById("delete_button").style.display = 'none';
+                        document.getElementById("delete_button").style.display = 'none';
+                        document.getElementById("errorlog").style.display = 'none';
+                        document.getElementById("save_changes").disabled = true;
 					$("#edit_modal").modal({
 						escapeClose: false,
 						clickClose: false,
@@ -277,6 +281,7 @@ License: You must have a valid license purchased only from themeforest(the above
                         document.getElementById("keterangan").value = data["keterangan"];
                         document.getElementById("referalcode").disabled = true;
                         document.getElementById("delete_button").style.display = 'none';
+                        document.getElementById("errorlog").style.display = 'none';
                         if(document.getElementById("typereferal").value == 4){
                             document.getElementById("delete_button").style.display = '';
                             document.getElementById("referalcode").disabled = false;
@@ -316,6 +321,32 @@ License: You must have a valid license purchased only from themeforest(the above
                     console.log(data);
                 });
                 $('#detail_modal').modal('show'); 
+            }
+
+            function insertktp(){
+                $id = document.getElementById("id").value;
+                if( $id == null || $id == ""){
+                    $id = "null";
+                }
+
+                if(document.getElementById("ktp").value != ""){
+                    $.get("http://localhost/company/Marketing_controller/getktp/"+document.getElementById("ktp").value+"/"+$id, function( data ) {
+                    if(data[0].count == "0"){
+                                document.getElementById("save_changes").disabled = false;
+                                document.getElementById("errorlog").style.display = 'none';
+                        }else{
+                                document.getElementById("save_changes").disabled = true;
+                                document.getElementById("errorlog").style.display = 'block';
+                                document.getElementById("errormessage").innerHTML = 'Nomor KTP Sudah terdaftar';
+                        }
+
+                        console.log(data);
+                    });
+                }else{
+                    document.getElementById("errorlog").style.display = 'block';
+                    document.getElementById("errormessage").innerHTML = 'Mohon Isi Nomor KTP';
+                    document.getElementById("save_changes").disabled = true;
+                }
             }
 
         </script>

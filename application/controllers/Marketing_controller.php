@@ -41,16 +41,16 @@ class Marketing_controller extends CI_Controller {
     {         
         if($this->session->userdata('type') == 4){
 			$data['marketings'] = $this->Marketing_model->get_all("m.type != '4'");
-			$data['type'] = $this->Codemaster_model->get_Codemaster("type = 'MRK'");
+			$data['type'] = $this->Codemaster_model->get_Codemaster("type = 'MRK' and code not in (5)");
 		}else{
 			$data['marketings'] = $this->Marketing_model->get_all("referalcode = '".$this->session->userdata('code')."'");
 		
 		}
 		
 		if($this->session->userdata('type') == 1){
-			$data['type'] = $this->Codemaster_model->get_Codemaster("type = 'MRK' and code in (2,5)");
+			$data['type'] = $this->Codemaster_model->get_Codemaster("type = 'MRK' and code in (2)");
 		}else if($this->session->userdata('type') == 2){
-			$data['type'] = $this->Codemaster_model->get_Codemaster("type = 'MRK' and code in (3,5)");
+			$data['type'] = $this->Codemaster_model->get_Codemaster("type = 'MRK' and code in (3)");
 		}else if($this->session->userdata('type') == 3){
 			$data['type'] = $this->Codemaster_model->get_Codemaster("type = 'MRK' and code = 5");
 		}
@@ -135,6 +135,11 @@ class Marketing_controller extends CI_Controller {
 	public function read_code($id){
 		header('Content-Type: application/json');
 		echo json_encode($this->Marketing_model->get_by_code("m.referalcode = '$id'"));
+	}
+	
+	public function getktp($ktp, $id){
+		header('Content-Type: application/json');
+		echo json_encode($this->Marketing_model->getktp($ktp, $id));
     }
 
 }
