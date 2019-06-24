@@ -93,7 +93,14 @@ class Potensial_customer extends CI_Controller {
  
     function index() 
     {         
-        $data['customers'] = $this->Potcustomer_model->get_all("referalcode = '".$this->session->userdata('code')."'");
+		
+		if($this->session->userdata('type') == 4){
+			$data['customers'] = $this->Potcustomer_model->get_all();
+		}else{
+			$data['customers'] = $this->Potcustomer_model->get_all("referalcode = '".$this->session->userdata('code')."'");
+		
+		}
+
         $this->load->view('template/head'); 
         $this->load->view('template/core_plugins'); 
         $this->load->view('potensial_customer', $data); 

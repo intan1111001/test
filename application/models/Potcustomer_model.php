@@ -17,6 +17,9 @@ class Potcustomer_model extends CI_Model
  
     function get_all($filter = "") 
         { 
+            if($filter != "" && $filter != null){
+                $this->db->where($filter); 
+            }
             $this->db->order_by($this->id, $this->order); 
             return $this->db->get($this->table)->result(); 
         } 
