@@ -72,6 +72,10 @@ License: You must have a valid license purchased only from themeforest(the above
             <!-- BEGIN REGISTRATION FORM -->
             <form class="register-form" action="Login/insert" method="post">
                 <h3 class="font-green">Sign Up</h3>
+                <div class="alert alert-danger display-hide" style="display: none;" id="errorlog">
+                    <button class="close" data-close="alert"></button>
+                <span id="errormessage"> </span>
+                </div>
                 <p class="hint"> details referal: </p>
                 <div class="form-group">
                     <label class="control-label visible-ie8 visible-ie9">Referal Code</label>
@@ -90,7 +94,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 <div class="form-group">
                     <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
                     <label class="control-label visible-ie8 visible-ie9">No KTP</label>
-                    <input class="form-control placeholder-no-fix" type="text" placeholder="No KTP" name="ktp" /> </div>
+                    <input class="form-control placeholder-no-fix" type="text" placeholder="No KTP" id="ktp"  name="ktp" onchange="javascript:change_ktp()"/> </div>
                 <div class="form-group">
                     <label class="control-label visible-ie8 visible-ie9">Alamat</label>
                     <input class="form-control placeholder-no-fix" type="text" placeholder="Alamat" name="alamat" /> </div>
@@ -171,10 +175,8 @@ License: You must have a valid license purchased only from themeforest(the above
                                 console.log(data);
                     document.getElementById("namareferal").value = data[0]["nama"];
                     document.getElementById("statusreferal").value = data[0]["description"];
-
-                    if(data[0]["type"] == 1){                            
-                       id = "2-5";
-                    }else if(data[0]["type"] == 2){                            
+                    id="2-5";
+                    if(data[0]["type"] == 2){                            
                        id = "3-5"; 
                     }
 
@@ -195,12 +197,58 @@ License: You must have a valid license purchased only from themeforest(the above
             }
 
             function change_type(){
+                    jenis = "Marketing";
                     if(document.getElementById("type").value == "5"){
                         document.getElementById("keterangan_cus").style.display = "";
                         document.getElementById("divusername").style.display = "none";
+                        jenis = "Customer";
                     }else{
                         document.getElementById("keterangan_cus").style.display = "none";
                         document.getElementById("divusername").style.display = "";
+                        jenis = "Marketing";
+                    }
+
+                    $id = "null";
+                    if(document.getElementById("ktp").value != ""){
+                        $.get("http://localhost/company/Marketing_controller/getktp/"+document.getElementById("ktp").value+"/"+$id + "/" +  jenis, function( data ) {
+                        if(data[0].count == "0"){
+                                    document.getElementById("register-submit-btn").disabled = false;
+                                    document.getElementById("errorlog").style.display = 'none';
+                            }else{
+                                    document.getElementById("register-submit-btn").disabled = true;
+                                    document.getElementById("errorlog").style.display = 'block';
+                                    document.getElementById("errormessage").innerHTML = 'Nomor KTP Sudah terdaftar';
+                            }
+
+                            console.log(data);
+                        });
+                    }else{
+                        document.getElementById("errorlog").style.display = 'block';
+                        document.getElementById("errormessage").innerHTML = 'Mohon Isi Nomor KTP';
+                        document.getElementById("register-submit-btn").disabled = true;
+                    }
+            }
+
+            function change_ktp(){
+                    $id = "null";
+                    jenis = "Marketing";
+                    if(document.getElementById("ktp").value != ""){
+                        $.get("http://localhost/company/Marketing_controller/getktp/"+document.getElementById("ktp").value+"/"+$id + "/" +  jenis, function( data ) {
+                        if(data[0].count == "0"){
+                                    document.getElementById("register-submit-btn").disabled = false;
+                                    document.getElementById("errorlog").style.display = 'none';
+                            }else{
+                                    document.getElementById("register-submit-btn").disabled = true;
+                                    document.getElementById("errorlog").style.display = 'block';
+                                    document.getElementById("errormessage").innerHTML = 'Nomor KTP Sudah terdaftar';
+                            }
+
+                            console.log(data);
+                        });
+                    }else{
+                        document.getElementById("errorlog").style.display = 'block';
+                        document.getElementById("errormessage").innerHTML = 'Mohon Isi Nomor KTP';
+                        document.getElementById("register-submit-btn").disabled = true;
                     }
             }
         </script>

@@ -330,7 +330,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 }
 
                 if(document.getElementById("ktp").value != ""){
-                    $.get("http://localhost/company/Marketing_controller/getktp/"+document.getElementById("ktp").value+"/"+$id, function( data ) {
+                    $.get("http://localhost/company/Marketing_controller/getktp/"+document.getElementById("ktp").value+"/"+$id + "/Customer", function( data ) {
                     if(data[0].count == "0"){
                                 document.getElementById("save_changes").disabled = false;
                                 document.getElementById("errorlog").style.display = 'none';

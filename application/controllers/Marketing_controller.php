@@ -137,9 +137,9 @@ class Marketing_controller extends CI_Controller {
 		echo json_encode($this->Marketing_model->get_by_code("m.referalcode = '$id'"));
 	}
 	
-	public function getktp($ktp, $id){
+	public function getktp($ktp, $id, $jenis){
 		header('Content-Type: application/json');
-		echo json_encode($this->Marketing_model->getktp($ktp, $id));
+		echo json_encode($this->Marketing_model->getktp($ktp, $id, $jenis));
     }
 
 }

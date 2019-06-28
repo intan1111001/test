@@ -48,7 +48,7 @@ class Marketing_model extends CI_Model
         return $hasil;
         } 
 
-        function getktp($ktp, $id = "") 
+        function getktp($ktp, $id = "", $jenis = "Marketing") 
         {             
             $this->db->select("COUNT(id) count");
             $this->db->from("marketing ");
@@ -59,7 +59,7 @@ class Marketing_model extends CI_Model
             }
             $query = $this->db->get();
             $hasil = $query->result_array();
-            if($hasil == null){
+            if($jenis != "Marketing"){
                 $this->db->select("COUNT(id) count");
                 $this->db->from("pot_customer ");
                 if($id != ""){
