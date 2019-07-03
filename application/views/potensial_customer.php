@@ -269,7 +269,9 @@ License: You must have a valid license purchased only from themeforest(the above
 					$("#edit_modal").modal({
 						escapeClose: false,
 						clickClose: false,
-						showClose: false
+						showClose: false,
+                        backdrop: 'static',
+                        keyboard: false
 					});
                 });
                 
@@ -302,7 +304,9 @@ License: You must have a valid license purchased only from themeforest(the above
                         $("#edit_modal").modal({
 						escapeClose: false,
 						clickClose: false,
-						showClose: false
+						showClose: false,
+                        backdrop: 'static',
+                        keyboard: false
 					});
                     },
                     error : function(res)

@@ -136,6 +136,13 @@ class Marketing_controller extends CI_Controller {
 		header('Content-Type: application/json');
 		echo json_encode($this->Marketing_model->get_by_code("m.referalcode = '$id' and m.type='$type'"));
 	}
+
+	public function get_sales($id){
+		header('Content-Type: application/json');
+		$data = $this->Marketing_model->get_by_code("m.id = '".$id."'");
+		echo json_encode($this->Marketing_model->get_by_code("m.referalcode = '".$data[0]["code"]."' and m.type=3"));
+		//echo json_encode($data[0]["referalcode"]);
+	}
 	
 	public function getktp($ktp, $id, $jenis){
 		header('Content-Type: application/json');

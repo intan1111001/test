@@ -279,94 +279,182 @@ License: You must have a valid license purchased only from themeforest(the above
 			</div>
 		</div>
                 <div id="detail_modal" class="modal fade" role="dialog" aria-hidden="true">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-							<h4 class="modal-title" id="label_detail_marketing">Detail Sales</h4>
-						</div>
-						<div class="modal-body">
-
-                             <!-- BEGIN EXAMPLE TABLE PORTLET-->
-                             <div class="portlet light portlet-fit portlet-datatable bordered">
-                                <div class="portlet-title">
-                                    <div class="caption">
-                                        <i class="icon-settings font-green"></i>
-                                        <span class="caption-subject font-green sbold uppercase" id="label_sub_detail_marketing">Detail Sales</span>
-                                    </div>
-                                    <div class="actions">
-                                        <div class="btn-group btn-group-devided" data-toggle="buttons">
-                                            <label class="btn btn-transparent grey-salsa btn-outline btn-circle btn-sm active">
-                                                <input type="radio" name="options" class="toggle" id="option1">Actions</label>
-                                            <label class="btn btn-transparent grey-salsa btn-outline btn-circle btn-sm">
-                                                <input type="radio" name="options" class="toggle" id="option2">Settings</label>
-                                        </div>
-                                        <div class="btn-group">
-                                            <a class="btn red btn-outline btn-circle" href="javascript:;" data-toggle="dropdown">
-                                                <i class="fa fa-share"></i>
-                                                <span class="hidden-xs"> Trigger Tools </span>
-                                                <i class="fa fa-angle-down"></i>
-                                            </a>
-                                            <ul class="dropdown-menu pull-right" id="sample_3_tools">
-                                                <li>
-                                                    <a href="javascript:;" data-action="0" class="tool-action">
-                                                        <i class="icon-printer"></i> Print</a>
-                                                </li>
-                                                <li>
-                                                    <a href="javascript:;" data-action="1" class="tool-action">
-                                                        <i class="icon-check"></i> Copy</a>
-                                                </li>
-                                                <li>
-                                                    <a href="javascript:;" data-action="2" class="tool-action">
-                                                        <i class="icon-doc"></i> PDF</a>
-                                                </li>
-                                                <li>
-                                                    <a href="javascript:;" data-action="3" class="tool-action">
-                                                        <i class="icon-paper-clip"></i> Excel</a>
-                                                </li>
-                                                <li>
-                                                    <a href="javascript:;" data-action="4" class="tool-action">
-                                                        <i class="icon-cloud-upload"></i> CSV</a>
-                                                </li>
-                                                <li class="divider"> </li>
-                                                <li>
-                                                    <a href="javascript:;" data-action="5" class="tool-action">
-                                                        <i class="icon-refresh"></i> Reload</a>
-                                                </li>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="portlet-body">
-                                    <div class="table-container">
-                                        <table class="table table-striped table-bordered table-hover" id="sample_3">
-                                        <thead>
-                                            <tr>
-                                            <th> No </th>
-                                            <th> No KTP </th>
-                                            <th> Nama </th>
-                                            <th> Hp </th>
-                                            <th> Email </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="bodytablepeserta">
-                                    
-                                        </tbody>
-                                        </table>
-                                    </div>
-                                </div>
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                <h4 class="modal-title" id="label_detail_marketing">Detail Sales</h4>
                             </div>
-                            <!-- END EXAMPLE TABLE PORTLET-->
+                            <div class="modal-body">
+
+                                <!-- BEGIN EXAMPLE TABLE PORTLET-->
+                                <div class="portlet light portlet-fit portlet-datatable bordered">
+                                    <div class="portlet-title">
+                                        <div class="caption">
+                                            <i class="icon-settings font-green"></i>
+                                            <span class="caption-subject font-green sbold uppercase" id="label_sub_detail_marketing">Detail Sales</span>
+                                        </div>
+                                        <div class="actions">
+                                            <div class="btn-group btn-group-devided" data-toggle="buttons">
+                                                <label class="btn btn-transparent grey-salsa btn-outline btn-circle btn-sm active">
+                                                    <input type="radio" name="options" class="toggle" id="option1">Actions</label>
+                                                <label class="btn btn-transparent grey-salsa btn-outline btn-circle btn-sm">
+                                                    <input type="radio" name="options" class="toggle" id="option2">Settings</label>
+                                            </div>
+                                            <div class="btn-group">
+                                                <a class="btn red btn-outline btn-circle" href="javascript:;" data-toggle="dropdown">
+                                                    <i class="fa fa-share"></i>
+                                                    <span class="hidden-xs"> Trigger Tools </span>
+                                                    <i class="fa fa-angle-down"></i>
+                                                </a>
+                                                <ul class="dropdown-menu pull-right" id="sample_3_tools">
+                                                    <li>
+                                                        <a href="javascript:;" data-action="0" class="tool-action">
+                                                            <i class="icon-printer"></i> Print</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:;" data-action="1" class="tool-action">
+                                                            <i class="icon-check"></i> Copy</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:;" data-action="2" class="tool-action">
+                                                            <i class="icon-doc"></i> PDF</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:;" data-action="3" class="tool-action">
+                                                            <i class="icon-paper-clip"></i> Excel</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:;" data-action="4" class="tool-action">
+                                                            <i class="icon-cloud-upload"></i> CSV</a>
+                                                    </li>
+                                                    <li class="divider"> </li>
+                                                    <li>
+                                                        <a href="javascript:;" data-action="5" class="tool-action">
+                                                            <i class="icon-refresh"></i> Reload</a>
+                                                    </li>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="portlet-body">
+                                        <div class="table-container">
+                                            <table class="table table-striped table-bordered table-hover" id="sample_3">
+                                            <thead>
+                                                <tr>
+                                                <th> No </th>
+                                                <th> No KTP </th>
+                                                <th> Nama </th>
+                                                <th> Hp </th>
+                                                <th> Email </th>
+                                                <th id="detail_sub_sales"> Detail </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="bodytablepeserta">
+                                        
+                                            </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- END EXAMPLE TABLE PORTLET-->
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn grey-salsa btn-outline" data-dismiss="modal">Close</button>
+                            </div>
                         </div>
-						<div class="modal-footer">
-							<button type="button" class="btn grey-salsa btn-outline" data-dismiss="modal">Close</button>
-					</div>
-				</div>
-			</div>	
+                    </div>	
             <!-- END CONTENT -->
-        </div>
-           
+                </div>
+                <div id="detail_sub_modal" class="modal fade" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                <h4 class="modal-title">List Sales</h4>
+                            </div>
+                            <div class="modal-body">
+
+                                <!-- BEGIN EXAMPLE TABLE PORTLET-->
+                                <div class="portlet light portlet-fit portlet-datatable bordered">
+                                    <div class="portlet-title">
+                                        <div class="caption">
+                                            <i class="icon-settings font-green"></i>
+                                            <span class="caption-subject font-green sbold uppercase" >List Sales</span>
+                                        </div>
+                                        <div class="actions">
+                                            <div class="btn-group btn-group-devided" data-toggle="buttons">
+                                                <label class="btn btn-transparent grey-salsa btn-outline btn-circle btn-sm active">
+                                                    <input type="radio" name="options" class="toggle" id="option1">Actions</label>
+                                                <label class="btn btn-transparent grey-salsa btn-outline btn-circle btn-sm">
+                                                    <input type="radio" name="options" class="toggle" id="option2">Settings</label>
+                                            </div>
+                                            <div class="btn-group">
+                                                <a class="btn red btn-outline btn-circle" href="javascript:;" data-toggle="dropdown">
+                                                    <i class="fa fa-share"></i>
+                                                    <span class="hidden-xs"> Trigger Tools </span>
+                                                    <i class="fa fa-angle-down"></i>
+                                                </a>
+                                                <ul class="dropdown-menu pull-right" id="sample_3_tools">
+                                                    <li>
+                                                        <a href="javascript:;" data-action="0" class="tool-action">
+                                                            <i class="icon-printer"></i> Print</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:;" data-action="1" class="tool-action">
+                                                            <i class="icon-check"></i> Copy</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:;" data-action="2" class="tool-action">
+                                                            <i class="icon-doc"></i> PDF</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:;" data-action="3" class="tool-action">
+                                                            <i class="icon-paper-clip"></i> Excel</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:;" data-action="4" class="tool-action">
+                                                            <i class="icon-cloud-upload"></i> CSV</a>
+                                                    </li>
+                                                    <li class="divider"> </li>
+                                                    <li>
+                                                        <a href="javascript:;" data-action="5" class="tool-action">
+                                                            <i class="icon-refresh"></i> Reload</a>
+                                                    </li>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="portlet-body">
+                                        <div class="table-container">
+                                            <table class="table table-striped table-bordered table-hover" id="sample_3">
+                                            <thead>
+                                                <tr>
+                                                <th> No </th>
+                                                <th> No KTP </th>
+                                                <th> Nama </th>
+                                                <th> Hp </th>
+                                                <th> Email </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="bodytablepeserta_sub">
+                                        
+                                            </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- END EXAMPLE TABLE PORTLET-->
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn grey-salsa btn-outline" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>	
+            <!-- END CONTENT -->
+                </div>
         <input type="hidden" id="typereferal" name="typereferal" value="<?php echo $this->session->userdata('type') ?>">
         <!-- END CONTAINER -->
         <?php $this->load->view('template/footer') ?>
@@ -397,7 +485,9 @@ License: You must have a valid license purchased only from themeforest(the above
 					$("#edit_modal").modal({
 						escapeClose: false,
 						clickClose: false,
-						showClose: false
+						showClose: false,
+                        backdrop: 'static',
+                        keyboard: false
 					});
                 });
                 
@@ -438,7 +528,9 @@ License: You must have a valid license purchased only from themeforest(the above
                         $("#edit_modal").modal({
 						escapeClose: false,
 						clickClose: false,
-						showClose: false
+						showClose: false,
+                        backdrop: 'static',
+                        keyboard: false
 					});
                     },
                     error : function(res)
@@ -463,21 +555,53 @@ License: You must have a valid license purchased only from themeforest(the above
                 if(type == 1){                    
                     document.getElementById("label_detail_marketing").innerHTML = 'List Team Leader';
                     document.getElementById("label_sub_detail_marketing").innerHTML = 'List Team Leader';
+                    document.getElementById("detail_sub_sales").style.display = 'block';
                     type = 2;
+                    $.get("http://localhost/company/Marketing_controller/read_code/"+id+"/"+type, function( data ) {
+                        $("#bodytablepeserta").html("");
+                    // $.get(base_url+"welcome/read/"+id, function( data ) {                   
+                    for(var i = 0; i<data.length; i++){
+                        $("#bodytablepeserta").append('<tr><th> '+ (i+1) + ' </th><th> '+data[i].ktp+' </th><th> '+data[i].nama+' </th><th> '+data[i].hp+'  </th><th> '+data[i].email+'  </th> <th><button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false" onclick="javascript:show_sales('+data[i].id+')"> Show Sales</button></th></tr>');
+                    }
+                });
                 }else{               
                     document.getElementById("label_detail_marketing").innerHTML = 'List Sales';
                     document.getElementById("label_sub_detail_marketing").innerHTML = 'List Sales';
+                    document.getElementById("detail_sub_sales").style.display = 'none';
                     type = 3;
-                }
-
-                $.get("http://localhost/company/Marketing_controller/read_code/"+id+"/"+type, function( data ) {
+                    $.get("http://localhost/company/Marketing_controller/read_code/"+id+"/"+type, function( data ) {
                         $("#bodytablepeserta").html("");
                     // $.get(base_url+"welcome/read/"+id, function( data ) {                   
                     for(var i = 0; i<data.length; i++){
                         $("#bodytablepeserta").append('<tr><th> '+ (i+1) + ' </th><th> '+data[i].ktp+' </th><th> '+data[i].nama+' </th><th> '+data[i].hp+'  </th><th> '+data[i].email+'  </th></tr>');
                     }
-                });
-                $('#detail_modal').modal('show'); 
+                    });
+                }
+                $("#detail_modal").modal({
+						escapeClose: false,
+						clickClose: false,
+						showClose: false,
+                        backdrop: 'static',
+                        keyboard: false
+					});
+            }
+
+            function show_sales(id){
+                $.get("http://localhost/company/Marketing_controller/get_sales/"+id, function( data ) {
+                        $("#bodytablepeserta_sub").html("");
+                    // $.get(base_url+"welcome/read/"+id, function( data ) {                   
+                    for(var i = 0; i<data.length; i++){
+                        $("#bodytablepeserta_sub").append('<tr><th> '+ (i+1) + ' </th><th> '+data[i].ktp+' </th><th> '+data[i].nama+' </th><th> '+data[i].hp+'  </th><th> '+data[i].email+'  </th></tr>');
+                    }
+                    });
+                    
+                $("#detail_sub_modal").modal({
+						escapeClose: false,
+						clickClose: false,
+						showClose: false,
+                        backdrop: 'static',
+                        keyboard: false
+					});
             }
 
             function insertktp(){
