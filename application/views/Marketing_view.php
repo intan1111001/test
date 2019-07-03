@@ -46,7 +46,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                                 </div>
                                                 <div  class="text-align-reverse"  >
                                                                 <a id="add_ruang" class="btn sbold green">
-                                                                    <i class="fa fa-plus"></i> Add New </a>
+                                                                    <i class="fa fa-plus"></i> Tambah Marketing </a>
                                                             </div>
                                             </div>
                                             <div class="portlet-body">
@@ -97,7 +97,13 @@ License: You must have a valid license purchased only from themeforest(the above
                                                                         <td>
                                                                             <?php if($marketing->type == 2){?>
                                                                             <div class="btn-group" >
-                                                                                <button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false" onclick="javascript:peserta('<?php echo $marketing->code ?>')"> Show Sales
+                                                                                <button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false" onclick="javascript:peserta('<?php echo $marketing->code ?>','<?php echo $marketing->type ?>')"> Show Sales
+                                                                                </button>
+                                                                            </div>
+                                                                            <?php } ?>
+                                                                            <?php if($marketing->type == 1){?>
+                                                                            <div class="btn-group" >
+                                                                                <button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false" onclick="javascript:peserta('<?php echo $marketing->code ?>','<?php echo $marketing->type ?>')"> Show Team Leader
                                                                                 </button>
                                                                             </div>
                                                                             <?php } ?>
@@ -127,7 +133,7 @@ License: You must have a valid license purchased only from themeforest(the above
 					<div class="modal-content">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-							<h4 class="modal-title">Edit Modal</h4>
+							<h4 class="modal-title" id="label_form_edit">Edit Form</h4>
 						</div>
 						<div class="modal-body">
                             
@@ -277,7 +283,7 @@ License: You must have a valid license purchased only from themeforest(the above
 					<div class="modal-content">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-							<h4 class="modal-title">Detail Sales</h4>
+							<h4 class="modal-title" id="label_detail_marketing">Detail Sales</h4>
 						</div>
 						<div class="modal-body">
 
@@ -286,7 +292,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <div class="portlet-title">
                                     <div class="caption">
                                         <i class="icon-settings font-green"></i>
-                                        <span class="caption-subject font-green sbold uppercase">Detail Sales</span>
+                                        <span class="caption-subject font-green sbold uppercase" id="label_sub_detail_marketing">Detail Sales</span>
                                     </div>
                                     <div class="actions">
                                         <div class="btn-group btn-group-devided" data-toggle="buttons">
@@ -370,7 +376,8 @@ License: You must have a valid license purchased only from themeforest(the above
         <script>
             $('#add_ruang').click(function(event) {
 					this.blur(); // Manually remove focus from clicked link.
-                    document.getElementById("nama").value = "";
+                        document.getElementById("label_form_edit").innerHTML = 'Tambah Marketing';
+                        document.getElementById("nama").value = "";
                         document.getElementById("id").value = "";
                         document.getElementById("alamat").value = "";
                         document.getElementById("ktp").value = "";
@@ -402,6 +409,7 @@ License: You must have a valid license purchased only from themeforest(the above
                     dataType : 'json',
                     success : function(data)
                     {
+                        document.getElementById("label_form_edit").innerHTML = 'Edit Marketing';
                         document.getElementById("id").value = data[0]["id"];
                         document.getElementById("nama").value = data[0]["nama"];
                         document.getElementById("alamat").value = data[0]["alamat"];
@@ -427,7 +435,6 @@ License: You must have a valid license purchased only from themeforest(the above
                             document.getElementById("password").disabled = false;
                             document.getElementById("username").disabled = false;
                         }
-                        console.log(data);
                         $("#edit_modal").modal({
 						escapeClose: false,
 						clickClose: false,
@@ -452,14 +459,23 @@ License: You must have a valid license purchased only from themeforest(the above
                 });
             }
 
-            function peserta(id){
-                $.get("http://localhost/company/Marketing_controller/read_code/"+id, function( data ) {
+            function peserta(id,type){
+                if(type == 1){                    
+                    document.getElementById("label_detail_marketing").innerHTML = 'List Team Leader';
+                    document.getElementById("label_sub_detail_marketing").innerHTML = 'List Team Leader';
+                    type = 2;
+                }else{               
+                    document.getElementById("label_detail_marketing").innerHTML = 'List Sales';
+                    document.getElementById("label_sub_detail_marketing").innerHTML = 'List Sales';
+                    type = 3;
+                }
+
+                $.get("http://localhost/company/Marketing_controller/read_code/"+id+"/"+type, function( data ) {
                         $("#bodytablepeserta").html("");
                     // $.get(base_url+"welcome/read/"+id, function( data ) {                   
                     for(var i = 0; i<data.length; i++){
                         $("#bodytablepeserta").append('<tr><th> '+ (i+1) + ' </th><th> '+data[i].ktp+' </th><th> '+data[i].nama+' </th><th> '+data[i].hp+'  </th><th> '+data[i].email+'  </th></tr>');
                     }
-                    console.log(data);
                 });
                 $('#detail_modal').modal('show'); 
             }
@@ -479,8 +495,6 @@ License: You must have a valid license purchased only from themeforest(the above
                                 document.getElementById("errorlog").style.display = 'block';
                                 document.getElementById("errormessage").innerHTML = 'Nomor KTP Sudah terdaftar';
                         }
-
-                        console.log(data);
                     });
                 }else{
                     document.getElementById("errorlog").style.display = 'block';

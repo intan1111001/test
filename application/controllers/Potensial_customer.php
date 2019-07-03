@@ -97,7 +97,7 @@ class Potensial_customer extends CI_Controller {
 		if($this->session->userdata('type') == 4){
 			$data['customers'] = $this->Potcustomer_model->get_all();
 		}else{
-			$data['customers'] = $this->Potcustomer_model->get_all("referalcode = '".$this->session->userdata('code')."'");
+			$data['customers'] = $this->Potcustomer_model->get_all("p.referalcode = '".$this->session->userdata('code')."'");
 		
 		}
 

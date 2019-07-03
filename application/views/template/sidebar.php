@@ -13,16 +13,20 @@
                     <!-- DOC: Set data-auto-speed="200" to adjust the sub menu slide up/down speed -->
                     <ul class="page-sidebar-menu   " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" style="height:100%;">
                         <li class="nav-item start ">
+                            <a href="<?php echo base_url(); ?>Profile" class="nav-link">
+                                <i class="icon-user"></i>
+                                <span class="title">Profile</span>
+                            </a>
+                        </li>
+                        <li class="nav-item  ">
                             <a href="<?php echo base_url(); ?>" class="nav-link nav-toggle">
                                 <i class="icon-home"></i>
                                 <span class="title">Marketing</span>
-                            </a>
-                            <a href="<?php echo base_url(); ?>Profile" class="nav-link nav-toggle">
-                                <i class="icon-home"></i>
-                                <span class="title">Profile</span>
-                            </a>
-                            <a href="<?php echo base_url(); ?>Potensial_customer" class="nav-link nav-toggle">
-                                <i class="icon-home"></i>
+                            </a>                        
+                        </li>
+                        <li class="nav-item  ">
+                            <a href="<?php echo base_url(); ?>Potensial_customer" class="nav-link">
+                                <i class="icon-users"></i>
                                 <span class="title">Potensial Customer</span>
                             </a>
                         </li>

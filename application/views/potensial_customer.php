@@ -46,7 +46,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                                 </div>
                                                 <div  class="text-align-reverse"  >
                                                                 <a id="add_ruang" class="btn sbold green">
-                                                                    <i class="fa fa-plus"></i> Add New </a>
+                                                                    <i class="fa fa-plus"></i> Tambah Customer </a>
                                                             </div>
                                             </div>
                                             <div class="portlet-body">
@@ -58,6 +58,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                                             <th> Nama</th>
                                                             <th> Alamat</th>
                                                             <th> Email</th>
+                                                            <th> Referal</th>
                                                             <th> Actions</th>
                                                         </tr>
                                                     </thead>
@@ -82,6 +83,17 @@ License: You must have a valid license purchased only from themeforest(the above
                                                                         </td>
                                                                         <td> 
                                                                             <?php echo $customer->email ?> 
+                                                                        </td> 
+                                                                        <td> 
+                                                                            <?php if($customer->type == 4 ){ 
+                                                                                 echo $customer->nama_referal ."/". $customer->nama_referal ."/". $customer->nama_referal;
+                                                                            } if($customer->type == 3 ){
+                                                                                 echo $customer->nama_referal  .'/'. $customer->nama_referal1 .'/'. $customer->nama_referal2;
+                                                                            } if($customer->type == 2 ){
+                                                                                 echo $customer->nama_referal  .'/'.  $customer->nama_referal .'/'. $customer->nama_referal1;
+                                                                            } if($customer->type == 1 ){
+                                                                                 echo $customer->nama_referal .'/'. $customer->nama_referal .'/'. $customer->nama_referal;
+                                                                            } ?> 
                                                                         </td> 
                                                                         <td>
                                                                             <div class="btn-group" >
@@ -114,7 +126,7 @@ License: You must have a valid license purchased only from themeforest(the above
 					<div class="modal-content">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-							<h4 class="modal-title">Edit Modal</h4>
+							<h4 class="modal-title" id="label_form_edit">Edit</h4>
 						</div>
 						<div class="modal-body">
 							<form action="Potensial_customer/insert" class="form-horizontal form-row-seperated login-form" id = "detail" name="detail" method="post">
@@ -243,6 +255,7 @@ License: You must have a valid license purchased only from themeforest(the above
             $('#add_ruang').click(function(event) {
 					this.blur(); // Manually remove focus from clicked link.
                     document.getElementById("nama").value = "";
+                        document.getElementById("label_form_edit").innerHTML = 'Tambah Customer';
                         document.getElementById("id").value = "";
                         document.getElementById("alamat").value = "";
                         document.getElementById("ktp").value = "";
@@ -268,7 +281,7 @@ License: You must have a valid license purchased only from themeforest(the above
                     dataType : 'json',
                     success : function(data)
                     {
-                        console.log(data);
+                        document.getElementById("label_form_edit").innerHTML = 'Edit Customer';
                         document.getElementById("id").value = data["id"];
                         document.getElementById("nama").value = data["nama"];
                         document.getElementById("alamat").value = data["alamat"];
@@ -286,7 +299,6 @@ License: You must have a valid license purchased only from themeforest(the above
                             document.getElementById("delete_button").style.display = '';
                             document.getElementById("referalcode").disabled = false;
                         }
-                        console.log(data);
                         $("#edit_modal").modal({
 						escapeClose: false,
 						clickClose: false,
@@ -311,18 +323,6 @@ License: You must have a valid license purchased only from themeforest(the above
                 });
             }
 
-            function peserta(id){
-                $.get("http://localhost/company/Marketing_controller/read_code/"+id, function( data ) {
-                        $("#bodytablepeserta").html("");
-                    // $.get(base_url+"welcome/read/"+id, function( data ) {                   
-                    for(var i = 0; i<data.length; i++){
-                        $("#bodytablepeserta").append('<tr><th> '+ (i+1) + ' </th><th> '+data[i].ktp+' </th><th> '+data[i].nama+' </th><th> '+data[i].hp+'  </th><th> '+data[i].email+'  </th></tr>');
-                    }
-                    console.log(data);
-                });
-                $('#detail_modal').modal('show'); 
-            }
-
             function insertktp(){
                 $id = document.getElementById("id").value;
                 if( $id == null || $id == ""){
@@ -339,8 +339,6 @@ License: You must have a valid license purchased only from themeforest(the above
                                 document.getElementById("errorlog").style.display = 'block';
                                 document.getElementById("errormessage").innerHTML = 'Nomor KTP Sudah terdaftar';
                         }
-
-                        console.log(data);
                     });
                 }else{
                     document.getElementById("errorlog").style.display = 'block';
