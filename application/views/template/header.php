@@ -5,7 +5,7 @@
                 <!-- BEGIN LOGO -->
                 <div class="page-logo">
                     <a href="<?php echo "assets/theme/assets/"; ?>index.html">
-                        <img src="<?php echo "assets/"; ?>theme/assets/layouts/layout4/img/logo1.png" alt="logo"  style="height: 135px;margin-top: -23px !important;"/> </a>
+                        <img src="<?php echo "assets/"; ?>theme/assets/layouts/layout4/img/logo_company.png" alt="logo"  style="height: 109px;margin-top: -13px !important; margin-left:50%;"/> </a>
                         <!-- <div>
                         <h1 style="font-size: 24px;color: white;">e-Event</h1><br/>
                                 <small style="font-size: 24px;color: white;">UIN Sunan Ampel</small>
@@ -44,7 +44,7 @@
                                 <a href="<?php echo "assets/"; ?>javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
                                     <span class="username username-hide-on-mobile" style="color:#fff;"> <?php echo $this->session->userdata('username')?> </span>
                                     <!-- DOC: Do not remove below empty space(&nbsp;) as its purposely used -->
-                                    <img alt="" class="img-circle" src="<?php echo "assets/"; ?>theme/assets/layouts/layout4/img/avatar9.jpg" /> </a>
+                                    <img alt="" class="img-circle" src="<?php echo "assets/"; ?>theme/assets/pages/media/profile/profile.png" /> </a>
                                 <ul class="dropdown-menu dropdown-menu-default">
                                     <li>
                                         <a href="Login">

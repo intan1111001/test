@@ -144,7 +144,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <div class="portlet light profile-sidebar-portlet bordered">
                                     <!-- SIDEBAR USERPIC -->
                                     <div class="profile-userpic" >
-                                        <img style = "height :auto !important" src="<?php echo "assets/"; ?>theme/assets/pages/media/profile/profile_user.jpg" class="img-responsive" alt=""> </div>
+                                        <img style = "height :auto !important" src="<?php echo "assets/"; ?>theme/assets/pages/media/profile/profile.png" class="img-responsive" alt=""> </div>
                                     <!-- END SIDEBAR USERPIC -->
                                     <!-- SIDEBAR USER TITLE -->
                                     <div class="profile-usertitle">
