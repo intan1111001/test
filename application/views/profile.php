@@ -144,7 +144,11 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <div class="portlet light profile-sidebar-portlet bordered">
                                     <!-- SIDEBAR USERPIC -->
                                     <div class="profile-userpic" >
+                                    <?php if ($marketings[0]["foto"] == '' or $marketings[0]["foto"] == null){?>
                                         <img style = "height :auto !important" src="<?php echo "assets/"; ?>theme/assets/pages/media/profile/profile.png" class="img-responsive" alt=""> </div>
+                                    <?php } else{?>
+                                        <img style = "height :auto !important" src="<?php echo str_replace("C:/xampp/htdocs/company",base_url(),$marketings[0]["foto"])?>" class="img-responsive" alt=""> </div>
+                                    <?php } ?>
                                     <!-- END SIDEBAR USERPIC -->
                                     <!-- SIDEBAR USER TITLE -->
                                     <div class="profile-usertitle">
@@ -154,8 +158,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <!-- END SIDEBAR USER TITLE -->
                                     <!-- SIDEBAR BUTTONS -->
                                     <div class="profile-userbuttons">
-                                        <button type="button" class="btn btn-circle green btn-sm">Follow</button>
-                                        <button type="button" class="btn btn-circle red btn-sm">Message</button>
+                                        <button type="button" class="btn btn-circle green btn-sm" onclick="javascript:change_foto(<?php echo $marketings[0]['id']?>)">Ubah Foto</button>
                                     </div>
                                     <!-- END SIDEBAR BUTTONS -->
                                     <!-- SIDEBAR MENU -->
@@ -244,6 +247,50 @@ License: You must have a valid license purchased only from themeforest(the above
                     </div>
                     <!-- END PAGE BASE CONTENT -->
                 </div>
+                <div id="change_foto" class="modal fade" role="dialog" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+							<h4 class="modal-title">Ubah Foto Profile</h4>
+						</div>
+						<div class="modal-body">
+                            <div class="input-group">
+                                <form action="#" class="form-horizontal form-row-seperated" id="confirm_form">
+                                <!-- <label class="col-sm-12 control-label" id="label_konfirm" name="label_konfirm"></label> -->
+                                <input type="hidden" id="id_marketing" name="id_marketing" value="">
+								<div class="form-group">
+                                    <label class="col-sm-4 control-label">Upload Foto</label>
+                                    <div class="col-sm-6">
+                                    <div class="fileinput fileinput-new" data-provides="fileinput">
+                                        <div class="input-group">
+                                            <div class="form-control uneditable-input input-fixed" data-trigger="fileinput">
+                                                <i class="fa fa-file fileinput-exists"></i>&nbsp;
+                                                <span class="fileinput-filename"> </span>
+                                            </div>
+                                            <span class="input-group-addon btn default btn-file">
+                                                <span class="fileinput-new"> Select file </span>
+                                                <span class="fileinput-exists"> Change </span>
+                                                <input type="file" name="foto" id="foto"> </span>
+                                            <a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput"> Remove </a>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn grey-salsa btn-outline" data-dismiss="modal">Cancel</button>
+                                    <!-- <button type="button" class="btn green" onclick="javascript:daftar_workshop()">
+                                        <i class="fa fa-check">OK</i> -->
+                                        <input class="btn green" type="submit" value="Save Change">
+                                </div>
+                                </form> 
+                            </div>
+                        </div>
+						
+				</div>
+			</div>	
+            <!-- END CONTENT -->
+        </div>
                 <!-- END CONTENT BODY -->
             </div>
             <!-- END CONTENT -->
@@ -264,6 +311,39 @@ License: You must have a valid license purchased only from themeforest(the above
                     $('#radio1003').attr('checked', 'checked');
                 });
             })
+
+            function change_foto(id){
+                document.getElementById("id_marketing").value = id;
+                $('#change_foto').modal('show'); 
+            }
+
+            $('#confirm_form').submit(function(e){
+                    e.preventDefault();
+                    $.ajax({
+                    url: "Profile/change_foto",
+                    type: "POST",
+                    data:  new FormData(this),
+                    contentType: false,
+                            cache: false,
+                    processData:false,
+                    beforeSend : function()
+                    {
+                        //$("#preview").fadeOut();
+                        $("#err").fadeOut();
+                    },
+                    success: function(data)
+                        {
+                            alert(data);
+                            $('#edit_modal').modal('hide');
+                            location.reload();   
+                        
+                        },
+                        error: function(e) 
+                        {
+                        console.log($("#err").html(e).fadeIn());
+                        }          
+                        });
+                    });
         </script>
     </body>
 

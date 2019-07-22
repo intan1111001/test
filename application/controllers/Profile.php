@@ -74,6 +74,35 @@ class Profile extends CI_Controller {
 
 	} 
 
+	public
+function change_foto() 
+        { 
+            $path = './uploads/'.$this->input->post('id_marketing', TRUE).'/';
+            $config['upload_path']          = $path;
+            $config['allowed_types']        = 'gif|jpg|jpeg|png';
+            $config['max_size']             = 1000000;
+    
+            if (!is_dir($path)) {
+                mkdir($path , 0777, TRUE);
+            
+            }
+            $this->load->library('upload', $config);
+            $uploadpath_foto = '';
+    
+            if ($this->upload->do_upload("foto"))
+            {
+                $uploadpath_foto = $this->upload->data('full_path'); 
+            }
+
+			$id = $this->input->post('id_marketing', TRUE) ;
+			$data = array( 
+				'foto' => $uploadpath_foto
+			); 
+			$this->Marketing_model->update($id , $data); 
+            header('Content-Type: application/json');
+            echo json_encode('success');
+        }
+
 }
 
  
