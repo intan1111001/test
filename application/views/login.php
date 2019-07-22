@@ -19,7 +19,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <!--<![endif]-->
     
 
-    <body class=" login">
+    <body class=" login" style = "background-image: url('assets/theme/assets/global/img/background.png');background-size:cover;">
         <!-- BEGIN LOGO -->
         <div class="logo">
             <a href="index.html">
@@ -170,7 +170,7 @@ License: You must have a valid license purchased only from themeforest(the above
             });
 
             function change_code(){
-                $.get("http://localhost/company/Login/read_code/"+document.getElementById("referalcode").value, 
+                $.get("<?php echo base_url();?>Login/read_code/"+document.getElementById("referalcode").value, 
                     function( data ) {
                                 console.log(data);
                     document.getElementById("namareferal").value = data[0]["nama"];
@@ -180,7 +180,7 @@ License: You must have a valid license purchased only from themeforest(the above
                        id = "3-5"; 
                     }
 
-                    $.get("http://localhost/company/Login/readtype/"+id, 
+                    $.get("<?php echo base_url();?>Login/readtype/"+id, 
                             function( datatype ) {
                                 console.log(datatype);
                                 if(datatype.length > 0){                               
@@ -210,7 +210,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
                     $id = "null";
                     if(document.getElementById("ktp").value != ""){
-                        $.get("http://localhost/company/Marketing_controller/getktp/"+document.getElementById("ktp").value+"/"+$id + "/" +  jenis, function( data ) {
+                        $.get("<?php echo base_url();?>Marketing_controller/getktp/"+document.getElementById("ktp").value+"/"+$id + "/" +  jenis, function( data ) {
                         if(data[0].count == "0"){
                                     document.getElementById("register-submit-btn").disabled = false;
                                     document.getElementById("errorlog").style.display = 'none';
@@ -233,7 +233,7 @@ License: You must have a valid license purchased only from themeforest(the above
                     $id = "null";
                     jenis = "Marketing";
                     if(document.getElementById("ktp").value != ""){
-                        $.get("http://localhost/company/Marketing_controller/getktp/"+document.getElementById("ktp").value+"/"+$id + "/" +  jenis, function( data ) {
+                        $.get("<?php echo base_url();?>Marketing_controller/getktp/"+document.getElementById("ktp").value+"/"+$id + "/" +  jenis, function( data ) {
                         if(data[0].count == "0"){
                                     document.getElementById("register-submit-btn").disabled = false;
                                     document.getElementById("errorlog").style.display = 'none';

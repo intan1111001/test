@@ -21,7 +21,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <html lang="en">
     <!--<![endif]-->
   
-    <body class="page-container-bg-solid page-header-fixed page-sidebar-closed-hide-logo workshop">
+    <body class="page-container-bg-solid page-header-fixed page-sidebar-closed-hide-logo workshop" style = "background-image: url('assets/theme/assets/global/img/background.png');background-size:cover;">
        
     <?php $this->load->view('template/header'); ?>
         <!-- BEGIN CONTAINER -->
@@ -334,7 +334,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 }
 
                 if(document.getElementById("ktp").value != ""){
-                    $.get("http://localhost/company/Marketing_controller/getktp/"+document.getElementById("ktp").value+"/"+$id + "/Customer", function( data ) {
+                    $.get("<?php echo base_url();?>Marketing_controller/getktp/"+document.getElementById("ktp").value+"/"+$id + "/Customer", function( data ) {
                     if(data[0].count == "0"){
                                 document.getElementById("save_changes").disabled = false;
                                 document.getElementById("errorlog").style.display = 'none';

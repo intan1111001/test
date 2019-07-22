@@ -21,7 +21,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <html lang="en">
     <!--<![endif]-->
   
-    <body class="page-container-bg-solid page-header-fixed page-sidebar-closed-hide-logo workshop">
+    <body class="page-container-bg-solid page-header-fixed page-sidebar-closed-hide-logo workshop" style = "background-image: url('assets/theme/assets/global/img/background.png');background-size:cover;">
        
     <?php $this->load->view('template/header'); ?>
         <!-- BEGIN CONTAINER -->
@@ -557,7 +557,7 @@ License: You must have a valid license purchased only from themeforest(the above
                     document.getElementById("label_sub_detail_marketing").innerHTML = 'List Team Leader';
                     document.getElementById("detail_sub_sales").style.display = 'block';
                     type = 2;
-                    $.get("http://localhost/company/Marketing_controller/read_code/"+id+"/"+type, function( data ) {
+                    $.get("<?php echo base_url();?>Marketing_controller/read_code/"+id+"/"+type, function( data ) {
                         $("#bodytablepeserta").html("");
                     // $.get(base_url+"welcome/read/"+id, function( data ) {                   
                     for(var i = 0; i<data.length; i++){
@@ -569,7 +569,7 @@ License: You must have a valid license purchased only from themeforest(the above
                     document.getElementById("label_sub_detail_marketing").innerHTML = 'List Sales';
                     document.getElementById("detail_sub_sales").style.display = 'none';
                     type = 3;
-                    $.get("http://localhost/company/Marketing_controller/read_code/"+id+"/"+type, function( data ) {
+                    $.get("<?php echo base_url();?>Marketing_controller/read_code/"+id+"/"+type, function( data ) {
                         $("#bodytablepeserta").html("");
                     // $.get(base_url+"welcome/read/"+id, function( data ) {                   
                     for(var i = 0; i<data.length; i++){
@@ -587,7 +587,7 @@ License: You must have a valid license purchased only from themeforest(the above
             }
 
             function show_sales(id){
-                $.get("http://localhost/company/Marketing_controller/get_sales/"+id, function( data ) {
+                $.get("<?php echo base_url();?>Marketing_controller/get_sales/"+id, function( data ) {
                         $("#bodytablepeserta_sub").html("");
                     // $.get(base_url+"welcome/read/"+id, function( data ) {                   
                     for(var i = 0; i<data.length; i++){
@@ -610,7 +610,7 @@ License: You must have a valid license purchased only from themeforest(the above
                     $id = "null";
                 }
                 if(document.getElementById("ktp").value != ""){
-                    $.get("http://localhost/company/Marketing_controller/getktp/"+document.getElementById("ktp").value+"/"+$id+"/Marketing", function( data ) {
+                    $.get("<?php echo base_url();?>Marketing_controller/getktp/"+document.getElementById("ktp").value+"/"+$id+"/Marketing", function( data ) {
                         if(data[0].count == "0"){
                                 document.getElementById("save_changes").disabled = false;
                                 document.getElementById("errorlog").style.display = 'none';

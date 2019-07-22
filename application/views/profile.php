@@ -19,7 +19,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <!--<![endif]-->
   
 
-    <body class="page-container-bg-solid page-header-fixed page-sidebar-closed-hide-logo  workshop">
+    <body class="page-container-bg-solid page-header-fixed page-sidebar-closed-hide-logo  workshop" style = "background-image: url('assets/theme/assets/global/img/background.png');background-size:cover;">
         <!-- BEGIN HEADER -->
     <?php $this->load->view('template/header'); ?>
         <!-- BEGIN HEADER & CONTENT DIVIDER -->
